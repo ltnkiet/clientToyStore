@@ -13,40 +13,52 @@ const DBLeftSection = () => {
       <ul className="flex flex-col gap-4">
         <NavLink
           className={({ isActive }) =>
-            isActive ? `${isActiveStyles} px-4 py-2 border-l-8 border-violet-500` : isNotActiveStyles
+            isActive
+              ? `${isActiveStyles} px-4 py-2 border-l-8 border-violet-500`
+              : isNotActiveStyles
           }
           to={"/dashboard/home"}>
           Thống kê
         </NavLink>
         <NavLink
           className={({ isActive }) =>
-            isActive ? `${isActiveStyles} px-4 py-2 border-l-8 border-violet-500` : isNotActiveStyles
+            isActive
+              ? `${isActiveStyles} px-4 py-2 border-l-8 border-violet-500`
+              : isNotActiveStyles
           }
           to={"/dashboard/orders"}>
           Đơn hàng
         </NavLink>
         <NavLink
           className={({ isActive }) =>
-            isActive ? `${isActiveStyles} px-4 py-2 border-l-8 border-violet-500` : isNotActiveStyles
+            isActive
+              ? `${isActiveStyles} px-4 py-2 border-l-8 border-violet-500`
+              : isNotActiveStyles
           }
           to={"/dashboard/products"}>
           Sản phẩm
         </NavLink>
         <NavLink
           className={({ isActive }) =>
-            isActive ? `${isActiveStyles} px-4 py-2 border-l-8 border-violet-500` : isNotActiveStyles
+            isActive
+              ? `${isActiveStyles} px-4 py-2 border-l-8 border-violet-500`
+              : isNotActiveStyles
           }
           to={"/dashboard/category"}>
           Danh mục
         </NavLink>
         <NavLink
           className={({ isActive }) =>
-            isActive ? `${isActiveStyles} px-4 py-2 border-l-8 border-violet-500` : isNotActiveStyles
+            isActive
+              ? `${isActiveStyles} px-4 py-2 border-l-8 border-violet-500`
+              : isNotActiveStyles
           }
           to={"/dashboard/users"}>
           Khách hàng
         </NavLink>
       </ul>
+
+      <div></div>
     </div>
   );
 };

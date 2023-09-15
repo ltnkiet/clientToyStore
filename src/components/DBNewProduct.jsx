@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { categories } from "../utils/styles";
+import React, { useState } from "react";
+//import { categories } from "../utils/styles";
 import { Spinner } from ".";
 import { FiUploadCloud } from "react-icons/fi";
 import {
@@ -18,11 +18,16 @@ import {
 import { motion } from "framer-motion";
 import { btnClick } from "../animation";
 import { MdDelete } from "../asset/icons/index";
+import { setAllProduct } from "../context/actions/productAction";
+import { addNewProduct, getAllProduct } from "../api";
 
 const DBNewProduct = () => {
+  
+  const category = useSelector((state) => state.category);
+
   const [itemName, setItemName] = useState("");
-  const [category, setCategory] = useState(null);
-  const [itemPrice, setitemPrice] = useState("");
+  const [categories, setCategories] = useState(null);
+  const [itemPrice, setItemPrice] = useState("");
   const [quantity, setQuantity] = useState("");
   const [description, setDescription] = useState("");
   const [isLoading, setisLoading] = useState(false);
@@ -76,7 +81,53 @@ const DBNewProduct = () => {
     });
   };
 
-  const submitItem = () => {};
+  const submitItem = () => {
+    const data = {
+      productName: itemName,
+      productCategory: categories,
+      productPrice: itemPrice,  
+      productQty: quantity,
+      productDes: description,
+      productImage: imageDownloadURL,
+    };
+    if (!itemName || !itemPrice || !quantity) {
+      dispatch(alertDanger("Vui lòng điền đầy đủ thông tin về sản phẩm."));
+      setTimeout(() => {
+        dispatch(alertNull());
+      }, 2000);
+      return;
+    }
+    // Kiểm tra sản phẩm đã tồn tại dựa trên productName
+    getAllProduct().then((products) => {
+      const existingProduct = products.find(
+        (product) =>
+          product.productName.toLowerCase() === itemName.toLowerCase()
+      );
+
+      if (existingProduct) {
+        dispatch(alertDanger(`Sản phẩm ${itemName} đã tồn tại.`));
+        setTimeout(() => {
+          dispatch(alertNull());
+        }, 2000);
+      } else {
+        addNewProduct(data).then((res) => {
+          dispatch(alertSuccess("Hoàn tất"));
+          setTimeout(() => {
+            dispatch(alertNull());
+          }, 2000);
+          setItemName("");
+          setCategories(null);
+          setItemPrice("");
+          setQuantity("");
+          setDescription("");
+          setimageDownloadURL(null);
+        });
+        getAllProduct().then((data) => {
+          dispatch(setAllProduct(data));
+        });
+      }
+    });
+  };
 
   return (
     <div className="flex items-center justify-center flex-col pt-6 px-24 w-[80%]">
@@ -89,7 +140,7 @@ const DBNewProduct = () => {
         />
         <div className="w-full">
           <select
-            onChange={(e) => setCategory(e.target.value)}
+            onChange={(e) => setCategories(e.target.value)}
             className="outline-none w-full text-base border-b-2 border-gray-200
               p-2 rounded-md cursor-pointer">
             <option value="orther" className="bg-white">
@@ -98,11 +149,11 @@ const DBNewProduct = () => {
             {category &&
               category?.map((item) => (
                 <option
-                  key={item.id}
-                  value={item.category}
+                  key={item.categoryId}
+                  value={item.categoryName}
                   className="text-base border-0 outline-none border-none
                   bg-white text-headingColor">
-                  {item.name}
+                  {item.categoryName}
                 </option>
               ))}
           </select>
@@ -111,7 +162,7 @@ const DBNewProduct = () => {
           type="number"
           placeHolder={"Đơn giá"}
           stateValue={itemPrice}
-          stateFunc={setitemPrice}
+          stateFunc={setItemPrice}
         />
         <InputValueField
           type="number"

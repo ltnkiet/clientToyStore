@@ -1,19 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import DataTable from "./DataTable";
-import { NavLink } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 const DBCategory = () => {
-
   const category = useSelector((state) => state.category);
-  
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   return (
-    <div className="flex flex-col items-center justify-self-center gap-4 pt-6 w-full relative">
-      <NavLink
-        to={"/dashboard/newCategory"}
-        className="absolute left-0 p-2 rounded-md bg-green-400 font-semibold text-primary hover:bg-green-600">
-        Thêm danh mục mới
-      </NavLink>
+    <div className="gap-4 pt-6">
       <DataTable
         title={"Danh sách danh mục"}
         column={[
@@ -32,18 +28,25 @@ const DBCategory = () => {
         data={category}
         actions={[
           {
+            icon: "add",
+            isFreeAction: true,
+            onClick: (event) => {
+              navigate("/dashboard/newCategory");
+            },
+          },
+          {
             icon: "edit",
             tooltip: "Edit Data",
-            // onclick: (event, rowData) => {
-            //   alert("Bạn có muốn cập nhật lại " + rowData.categoryName);
-            // },
+            onClick: (event, rowData) => {
+              alert("Bạn có muốn cập nhật lại " + rowData.categoryName);
+            },
           },
           {
             icon: "delete",
             tooltip: "Delete Data",
-            // onclick: (event, rowData) => {
-            //   alert("Bạn có muốn xóa " + rowData.categoryName);
-            // },
+            onClick: (event, rowData) => {
+              alert("Bạn có muốn xóa " + rowData.categoryName);
+            },
           },
         ]}
       />

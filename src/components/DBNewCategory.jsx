@@ -32,7 +32,10 @@ const DBNewCategory = () => {
   const uploadImage = (e) => {
     setisLoading(true);
     const imageFile = e.target.files[0];
-    const storageRef = ref(storage, `category_thumbnail/${Date.now()}_${imageFile.name}`);
+    const storageRef = ref(
+      storage,
+      `category_thumbnail/${Date.now()}_${imageFile.name}`
+    );
     const uploadTask = uploadBytesResumable(storageRef, imageFile);
 
     uploadTask.on(
@@ -76,20 +79,34 @@ const DBNewCategory = () => {
   const submitCategory = () => {
     const data = {
       categoryName: catName,
-      categoryImage: imageDownloadURL 
-    }
-    addNewCategory(data).then((res) => {
-      console.log(res)
-      dispatch(alertSuccess('Hoàn tất'))
-      setTimeout(() => {
-        dispatch(alertNull())
-      }, 2000)
-      setimageDownloadURL(null)
-      setCatName("")
-    })
-    getAllCategory().then((data) => {
-      dispatch(setAllCategory(data))
-    })
+      categoryImage: imageDownloadURL,
+    };
+
+    getAllCategory().then((category) => {
+      const existingCategory = category.find(
+        (cat) => cat.categoryName.toLowerCase() === catName.toLowerCase()
+      );
+
+      if (existingCategory) {
+        dispatch(alertDanger(`Danh mục ${catName} đã tồn tại.`));
+        setTimeout(() => {
+          dispatch(alertNull());
+        }, 2000);
+      } else {
+        addNewCategory(data).then((res) => {
+          console.log(res);
+          dispatch(alertSuccess("Hoàn tất"));
+          setTimeout(() => {
+            dispatch(alertNull());
+          }, 2000);
+          setimageDownloadURL(null);
+          setCatName("");
+        });
+        getAllCategory().then((data) => {
+          dispatch(setAllCategory(data));
+        });
+      }
+    });
   };
 
   return (

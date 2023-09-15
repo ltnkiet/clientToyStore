@@ -6,7 +6,7 @@ import {DBHome, DBOrders, DBProducts, DBNewProduct, DBUsers, DBCategory, DBNewCa
 
 const DBRightSection = () => {
   return (
-    <div className='flex flex-col p-12 flex-1 h-full'>
+    <div className='w-full flex flex-col p-12 flex-1 h-full'>
       <DBHeader/>
       <div className='flex flex-col flex-1 overflow-y-scroll scrollbar-none'>
         <Routes>
