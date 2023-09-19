@@ -16,7 +16,7 @@ const Main = () => {
         dispatch(setAllProduct(data));
       });
     }
-  }, []);
+  },[products]);
   return (
     <main className="w-screen min-h-screen flex items-center justify-center flex-col bg-primary">
       <Header />

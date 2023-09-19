@@ -104,10 +104,9 @@ const DBProducts = () => {
                 )
               ) {
                 DeleteProduct(rowData.productId).then((res) => {
-                  dispatch(alertSuccess("Deleted Success"));
-                  setInterval(() => {
-                    dispatch(alertNull);
-                  }, 3000);
+                  setTimeout(() => {
+                    dispatch(alertSuccess("Deleted Success"));
+                  }, 2000);
                   getAllProduct().then((data) => {
                     dispatch(setAllProduct(data));
                   });

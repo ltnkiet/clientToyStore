@@ -18,7 +18,7 @@ import {
 } from "firebase/auth";
 
 import { app } from "../config/firebase.config";
-import { validateUserJWTToken } from "../api";
+import { signUpUser, validateUserJWTToken } from "../api";
 
 import { useNavigate } from "react-router-dom";
 import { alertInfor, alertWarning } from "../context/actions/alertActions";
@@ -84,7 +84,6 @@ const Login = () => {
             }
           });
         });
-        console.log("Equal");
       } else {
         dispatch(alertWarning("Mật khẩu không trùng khớp"));
       }

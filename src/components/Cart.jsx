@@ -12,10 +12,12 @@ import { setCartOff } from "../context/actions/displayCartActions";
 import { setCartItems } from "../context/actions/cartActions";
 import EmptyCart from "../asset/img/emptyCart.svg";
 import { btnClick } from "../animation";
-import { getCartItems, updateItemQty } from "../api";
-import { alertNull } from "../context/actions/alertActions";
+import { getCartItems, server, updateItemQty } from "../api";
+import axios from "axios";
 
 const Cart = () => {
+  
+  const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
   const dispacth = useDispatch();
   const [total, setTotal] = useState(0);
@@ -29,6 +31,10 @@ const Cart = () => {
       });
     }
   }, [cart]);
+
+  const checkOut = () => {
+    
+  }
 
   return (
     <motion.div
@@ -51,7 +57,7 @@ const Cart = () => {
           <RiRefreshFill />
         </motion.p>
       </div>
-      <div className="flex-1 flex rounded-t-3xl shadow-md flex-col w-full h-full pb-6  gap-3 relative items-start justify-start">
+      <div className="flex-1 flex rounded-t-3xl shadow-md flex-col w-full h-full pb-6 gap-3 relative items-start justify-start">
         {cart && cart?.length > 0 ? (
           <>
             <div className="flex flex-col w-full h-[75%] items-start justify-start gap-3 overflow-y-scroll scrollbar-none px-6">
@@ -61,19 +67,36 @@ const Cart = () => {
                   <CartItemCard key={i} index={i} data={item} />
                 ))}
             </div>
-
             <div className="w-full h-[24%] px-6">
               <div className="w-full border-b-[2px] border-gray-600"></div>
               <div className="w-full flex items-center justify-between my-6">
                 <p className="text-xl font-semibold">Tổng tiền</p>
-                <p className="text-xl font-semibold"></p>
+                <p className="text-xl font-semibold">{formatCurrency(total)}</p>
               </div>
+              {user ? (
+                <motion.button
+                  onClick={checkOut()}
+                  {...btnClick}
+                  className="w-full p-2 px-20 rounded-full bg-gradient-to-tr from-violet-500
+              to-violet-700 text-gray-50 text-lg my-2 hover:shadow-lg">
+                  Tiến hành thanh toán
+                </motion.button>
+              ) : (
+                <motion.button
+                  {...btnClick}
+                  onClick={checkOut()}
+                  className="w-full p-2 rounded-full bg-gradient-to-tr from-violet-500 
+              to-violet-700 text-gray-50 text-lg my-2 hover:shadow-lg">
+                  Đăng nhập để thanh toán
+                </motion.button>
+              )}
             </div>
           </>
         ) : (
           <div className="w-full h-full flex flex-col items-center justify-center gap-6">
             <img src={EmptyCart} className="w-300" alt="" />
-            <p className="text-xl text-textColor font-semibold">
+            <p 
+              className="text-xl text-textColor font-semibold">
               Chưa có sản phẩm nào trong giỏ hàng
             </p>
           </div>
@@ -81,6 +104,13 @@ const Cart = () => {
       </div>
     </motion.div>
   );
+};
+
+export const formatCurrency = (value) => {
+  return new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  }).format(value);
 };
 
 export default Cart;
@@ -96,7 +126,6 @@ export const CartItemCard = ({ index, data }) => {
     updateItemQty(user?.user_id, productId, "decrement").then((data) => {
       getCartItems(user?.user_id).then((items) => {
         dispacth(setCartItems(items));
-        dispacth(alertNull());
       });
     });
   };
@@ -104,7 +133,6 @@ export const CartItemCard = ({ index, data }) => {
     updateItemQty(user?.user_id, productId, "increment").then((data) => {
       getCartItems(user?.user_id).then((items) => {
         dispacth(setCartItems(items));
-        dispacth(alertNull());
       });
     });
   };
@@ -128,12 +156,7 @@ export const CartItemCard = ({ index, data }) => {
         <p className="text-lg w-[70%] whitespace-nowrap overflow-hidden overflow-ellipsis">
           {data?.productName}
         </p>
-        <p className="text-sm">
-          {Intl.NumberFormat("vi-VN", {
-            style: "currency",
-            currency: "VND",
-          }).format(itemTotal)}
-        </p>
+        <p className="text-sm">{formatCurrency(itemTotal)}</p>
       </div>
       <div className="group flex items-center gap-2 ml-auto cursor-pointer font-medium">
         <motion.div {...btnClick} onClick={() => decrementQty(data?.productId)}>
