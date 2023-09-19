@@ -4,7 +4,7 @@ import Logo from "../asset/img/logo.png";
 import { isActiveStyles, isNotActiveStyles } from "../utils/styles";
 import { btnClick, slideTop } from "../animation/index";
 import { motion } from "framer-motion";
-import { MdShoppingCart, MdLogout } from "react-icons/md";
+import { MdShoppingCart, MdLogout } from "../asset/icons/index";
 import { useDispatch, useSelector } from "react-redux";
 import Avatar from "../asset/img/avatar.png";
 import { getAuth } from "firebase/auth";

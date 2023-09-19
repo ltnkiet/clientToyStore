@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Spinner } from ".";
-import { FiUploadCloud } from "react-icons/fi";
+import { FiUploadCloud, MdDelete } from "../asset/icons/index";
 import {
   ref,
   uploadBytesResumable,
@@ -16,7 +16,6 @@ import {
 } from "../context/actions/alertActions";
 import { motion } from "framer-motion";
 import { btnClick } from "../animation";
-import { MdDelete } from "../asset/icons/index";
 import { addNewCategory, getAllCategory } from "../api";
 import { setAllCategory } from "../context/actions/categoryActions";
 

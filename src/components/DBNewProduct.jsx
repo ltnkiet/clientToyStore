@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 //import { categories } from "../utils/styles";
 import { Spinner } from ".";
-import { FiUploadCloud } from "react-icons/fi";
 import {
   ref,
   uploadBytesResumable,
@@ -17,7 +16,7 @@ import {
 } from "../context/actions/alertActions";
 import { motion } from "framer-motion";
 import { btnClick } from "../animation";
-import { MdDelete } from "../asset/icons/index";
+import { MdDelete, FiUploadCloud } from "../asset/icons/index";
 import { setAllProduct } from "../context/actions/productAction";
 import { addNewProduct, getAllProduct } from "../api";
 

@@ -15,9 +15,10 @@ import {
 } from "react-icons/bs";
 import { IoFastFood, IoBasket } from "react-icons/io5";
 import { BiChevronsRight, BiMinus, BiPlus, BiSolidMap } from "react-icons/bi";
+import { HiOutlineMail } from "react-icons/hi";
 import { HiCurrencyRupee } from "react-icons/hi2";
 import {FiUploadCloud} from 'react-icons/fi'
-import { RiRefreshFill } from "react-icons/ri";
+import { RiRefreshFill, RiLockPasswordLine } from "react-icons/ri";
 
 
 
@@ -39,9 +40,9 @@ export {
   BiChevronsRight,
   FcClearFilters,
   FaArrowLeft,
-  HiCurrencyRupee,
+  HiCurrencyRupee,HiOutlineMail,
   FiUploadCloud,
-  RiRefreshFill, 
+  RiRefreshFill, RiLockPasswordLine,
   MdOutlineKeyboardBackspace, MdEmail,
   BiMinus, BiPlus, BiSolidMap
 };

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { HiOutlineMail } from "react-icons/hi";
 import LoginInput from "../components/LoginInput";
-import { RiLockPasswordLine } from "react-icons/ri";
-import { FcGoogle } from "react-icons/fc";
+import { FcGoogle, HiOutlineMail, RiLockPasswordLine} from "../asset/icons/index";
 import { motion } from "framer-motion";
 import { btnClick } from "../animation";
 import { setUserDetails } from "../context/actions/userActions";
