@@ -35,7 +35,7 @@ const SliderCard = ({ data, index }) => {
             className="w-full h-full p-3 object-cover"
           />
         </div>
-        <div className="md:w-[260px] max-w-[250px] flex flex-col my-0 py-[1px] gap-4 items-center">
+        <div className="md:w-[260px] max-w-[250px] flex flex-col my-0 py-[1px] gap-4 items-start">
           <p className="text-lg w-[250px] font-normal cursor-pointer whitespace-nowrap overflow-hidden overflow-ellipsis">
             {data.productName}
           </p>

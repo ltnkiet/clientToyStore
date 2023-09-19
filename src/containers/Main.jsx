@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "../asset/css/Loader.css";
-import { FilterSection, Header, Home, HomeSlider, Cart, CheckOut } from "../components";
+import { FilterSection, Header, Home, HomeSlider, Cart, CheckOut, Footer } from "../components";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllProduct } from "../api/index";
 import { setAllProduct } from "../context/actions/productAction";
@@ -24,10 +24,10 @@ const Main = () => {
         <Home />
         <HomeSlider />
         <FilterSection/>
-        
       </div>
       {isCart && <Cart/>}
-      <CheckOut/>
+      {/* <CheckOut/> */}
+      <Footer/>
     </main>
   );
 };

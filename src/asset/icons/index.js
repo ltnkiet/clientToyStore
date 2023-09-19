@@ -6,14 +6,15 @@ import {
   FaArrowLeft,
 } from "react-icons/fa";
 import { FcGoogle, FcClearFilters } from "react-icons/fc";
-import { MdShoppingCart, MdLogout, MdSearch, MdDelete, MdOutlineKeyboardBackspace } from "react-icons/md";
+import { MdShoppingCart, MdLogout, MdSearch, MdDelete, MdOutlineKeyboardBackspace, MdEmail } from "react-icons/md";
 import {
   BsToggles2,
   BsFillBellFill,
   BsExclamationTriangleFill,
+  BsFillTelephoneFill
 } from "react-icons/bs";
 import { IoFastFood, IoBasket } from "react-icons/io5";
-import { BiChevronsRight, BiMinus, BiPlus } from "react-icons/bi";
+import { BiChevronsRight, BiMinus, BiPlus, BiSolidMap } from "react-icons/bi";
 import { HiCurrencyRupee } from "react-icons/hi2";
 import {FiUploadCloud} from 'react-icons/fi'
 import { RiRefreshFill } from "react-icons/ri";
@@ -33,7 +34,7 @@ export {
   MdDelete,
   FaCloudUploadAlt,
   FaCheck,
-  BsExclamationTriangleFill,
+  BsExclamationTriangleFill, BsFillTelephoneFill,
   IoBasket,
   BiChevronsRight,
   FcClearFilters,
@@ -41,6 +42,6 @@ export {
   HiCurrencyRupee,
   FiUploadCloud,
   RiRefreshFill, 
-  MdOutlineKeyboardBackspace,
-  BiMinus, BiPlus
+  MdOutlineKeyboardBackspace, MdEmail,
+  BiMinus, BiPlus, BiSolidMap
 };
