@@ -12,11 +12,11 @@ import { setCartOff } from "../context/actions/displayCartActions";
 import { setCartItems } from "../context/actions/cartActions";
 import EmptyCart from "../asset/img/emptyCart.svg";
 import { btnClick } from "../animation";
-import { getCartItems, server, updateItemQty } from "../api";
-import axios from "axios";
+import { getCartItems, updateItemQty } from "../api";
+import { useNavigate } from "react-router-dom";
 
 const Cart = () => {
-  
+  const navigate = useNavigate();
   const user = useSelector((state) => state.user);
   const cart = useSelector((state) => state.cart);
   const dispacth = useDispatch();
@@ -31,10 +31,6 @@ const Cart = () => {
       });
     }
   }, [cart]);
-
-  const checkOut = () => {
-    
-  }
 
   return (
     <motion.div
@@ -75,7 +71,7 @@ const Cart = () => {
               </div>
               {user ? (
                 <motion.button
-                  onClick={checkOut()}
+                  onClick={() => navigate("/checkout")}
                   {...btnClick}
                   className="w-full p-2 px-20 rounded-full bg-gradient-to-tr from-violet-500
               to-violet-700 text-gray-50 text-lg my-2 hover:shadow-lg">
@@ -84,7 +80,6 @@ const Cart = () => {
               ) : (
                 <motion.button
                   {...btnClick}
-                  onClick={checkOut()}
                   className="w-full p-2 rounded-full bg-gradient-to-tr from-violet-500 
               to-violet-700 text-gray-50 text-lg my-2 hover:shadow-lg">
                   Đăng nhập để thanh toán
@@ -95,8 +90,7 @@ const Cart = () => {
         ) : (
           <div className="w-full h-full flex flex-col items-center justify-center gap-6">
             <img src={EmptyCart} className="w-300" alt="" />
-            <p 
-              className="text-xl text-textColor font-semibold">
+            <p className="text-xl text-textColor font-semibold">
               Chưa có sản phẩm nào trong giỏ hàng
             </p>
           </div>
