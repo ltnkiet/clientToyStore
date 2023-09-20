@@ -14,7 +14,7 @@ import {
   BsFillTelephoneFill
 } from "react-icons/bs";
 import { IoFastFood, IoBasket } from "react-icons/io5";
-import { BiChevronsRight, BiMinus, BiPlus, BiSolidMap } from "react-icons/bi";
+import { BiChevronsRight, BiMinus, BiPlus, BiSolidMap, BiUser, BiSolidNotepad } from "react-icons/bi";
 import { HiOutlineMail } from "react-icons/hi";
 import { HiCurrencyRupee } from "react-icons/hi2";
 import {FiUploadCloud} from 'react-icons/fi'
@@ -44,5 +44,5 @@ export {
   FiUploadCloud,
   RiRefreshFill, RiLockPasswordLine,
   MdOutlineKeyboardBackspace, MdEmail,
-  BiMinus, BiPlus, BiSolidMap
+  BiMinus, BiPlus, BiSolidMap, BiUser, BiSolidNotepad
 };
